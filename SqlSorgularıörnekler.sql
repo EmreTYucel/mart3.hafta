@@ -6,14 +6,12 @@ ALTER TABLE Books ADD COLUMN publisher VARCHAR(100);
 ALTER TABLE Books ALTER COLUMN "Publication Year" TYPE INT;
 
 -- B) UPDATE, DELETE kullanımı
--- UPDATE örneği: Bir kitabın ismini güncelleme
 UPDATE Books SET bookname = 'Yeni Kitap' WHERE id = 1;
 
 -- DELETE örneği: Belirli bir kitabı silme
 DELETE FROM Books WHERE id = 5;
 
 -- C) INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN farkları
--- INNER JOIN örneği: Kategorisi olan kitapları listeleme
 SELECT B.bookname, C."Category_Name" FROM Books B INNER JOIN Category C ON B.categoryid = C.id;
 
 -- LEFT JOIN örneği: Tüm kitapları ve varsa kategorilerini gösterme
@@ -32,7 +30,6 @@ GROUP BY C."Category_Name"
 HAVING COUNT(B.id) > 5;
 
 -- E) LIMIT, OFFSET kullanarak sıralı veri çekme
--- İlk 5 kitabı getirme
 SELECT * FROM Books ORDER BY "Publication Year" DESC LIMIT 5;
 
 -- 5. kitaptan sonraki 5 kitabı getirme
@@ -43,7 +40,6 @@ SELECT * FROM Books ORDER BY "Publication Year" DESC LIMIT 5 OFFSET 5;
 SELECT * FROM Books WHERE "Publication Year" = (SELECT MAX("Publication Year") FROM Books);
 
 -- G) AND / OR mantıksal operatörleri
--- 2020 yılından sonra yayımlanan ve Bilgisayar kategorisinde olan kitapları getirme
 SELECT * FROM Books WHERE "Publication Year" > 2020 AND categoryid = (SELECT id FROM Category WHERE "Category_Name" = 'Bilgisayar Bilimleri');
 
 -- H) BETWEEN ile aralık filtrelemesi
